@@ -1,23 +1,59 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>Hello Worlds 2</h1>
-<p>I'm hosted with GitHub Pages.</p>
- <table style="border-collapse: collapse;">
-      <tr>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 1"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 2"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 3"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 4"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 5"></td>
-      </tr>
-      <tr>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 6"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 7"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 8"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 9"></td>
-        <td style="border: 1px solid black;"><img src="images\airplane.png" alt="Image 10"></td>
-      </tr>
-    </table>
-</body>
+  <head>
+    <title>Word Box Game</title>
+    <style>
+      .box {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-color: lightblue;
+        border: 1px solid black;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 10px;
+      }
+
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Word Box Game</h1>
+    <p>Type the three-letter words to make the boxes disappear!</p>
+    <div id="game-container">
+      <div class="box" id="box-1">CAT</div>
+      <div class="box" id="box-2">DOG</div>
+      <div class="box" id="box-3">RAT</div>
+      <div class="box" id="box-4">PIG</div>
+      <div class="box" id="box-5">ANT</div>
+      <div class="box" id="box-6">OWL</div>
+      <div class="box" id="box-7">FOX</div>
+      <div class="box" id="box-8">BEE</div>
+      <div class="box" id="box-9">BAT</div>
+      <div class="box" id="box-10">HEN</div>
+    </div>
+    <script>
+      // Get all the box elements
+      var boxes = document.querySelectorAll(".box");
+
+      // Add a click event listener to each box
+      boxes.forEach(function(box) {
+        box.addEventListener("click", function() {
+          // Get the text content of the box
+          var text = this.textContent.trim().toLowerCase();
+          
+          // Check if the text matches the input
+          var input = prompt("Type the three-letter word:");
+          if (input && input.trim().toLowerCase() === text) {
+            // If the input matches, hide the box
+            this.classList.add("hidden");
+          }
+        });
+      });
+    </script>
+  </body>
 </html>
