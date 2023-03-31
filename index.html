@@ -1,59 +1,71 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Word Box Game</title>
-    <style>
-      .box {
-        display: inline-block;
-        width: 100px;
-        height: 100px;
-        background-color: lightblue;
-        border: 1px solid black;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        cursor: pointer;
-        margin: 10px;
-      }
+<head>
+	<title>Word Game</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+		}
+		.word {
+			display: inline-block;
+			margin: 10px;
+			padding: 10px;
+			border: 1px solid black;
+			background-color: lightblue;
+			font-size: 24px;
+			font-weight: bold;
+			cursor: pointer;
+		}
+		.word:hover {
+			background-color: blue;
+			color: white;
+		}
+		.word.done {
+			display: none;
+		}
+	</style>
+	<script>
+		window.onload = function() {
+			var words = document.getElementsByClassName('word');
+			for (var i = 0; i < words.length; i++) {
+				words[i].onclick = function() {
+					if (this.innerHTML.length == 3) {
+						this.classList.add('done');
+						var newWord = generateWord();
+						if (newWord) {
+							document.body.appendChild(newWord);
+						}
+					}
+				}
+			}
 
-      .hidden {
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Word Box Game</h1>
-    <p>Type the three-letter words to make the boxes disappear!</p>
-    <div id="game-container">
-      <div class="box" id="box-1">CAT</div>
-      <div class="box" id="box-2">DOG</div>
-      <div class="box" id="box-3">RAT</div>
-      <div class="box" id="box-4">PIG</div>
-      <div class="box" id="box-5">ANT</div>
-      <div class="box" id="box-6">OWL</div>
-      <div class="box" id="box-7">FOX</div>
-      <div class="box" id="box-8">BEE</div>
-      <div class="box" id="box-9">BAT</div>
-      <div class="box" id="box-10">HEN</div>
-    </div>
-    <script>
-      // Get all the box elements
-      var boxes = document.querySelectorAll(".box");
-
-      // Add a click event listener to each box
-      boxes.forEach(function(box) {
-        box.addEventListener("click", function() {
-          // Get the text content of the box
-          var text = this.textContent.trim().toLowerCase();
-          
-          // Check if the text matches the input
-          var input = prompt("Type the three-letter word:");
-          if (input && input.trim().toLowerCase() === text) {
-            // If the input matches, hide the box
-            this.classList.add("hidden");
-          }
-        });
-      });
-    </script>
-  </body>
+			function generateWord() {
+				var words = ['cat', 'dog', 'rat', 'car', 'bus', 'red', 'sky', 'sun'];
+				for (var i = 0; i < words.length; i++) {
+					if (!document.querySelector('.word:not(.done):contains("' + words[i] + '")')) {
+						// If the word is not already on the page and not marked as "done"
+						var word = document.createElement('div');
+						word.className = 'word';
+						word.innerHTML = words[i];
+						return word;
+					}
+				}
+				return null;
+			}
+		}
+	</script>
+</head>
+<body>
+	<h1>Word Game</h1>
+	<p>Type in three letter words to make them disappear:</p>
+	<div class="word">cat</div>
+	<div class="word">dog</div>
+	<div class="word">rat</div>
+	<div class="word">car</div>
+	<div class="word">bus</div>
+	<div class="word">red</div>
+	<div class="word">sky</div>
+	<div class="word">sun</div>
+</body>
 </html>
